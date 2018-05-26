@@ -1,0 +1,21 @@
+{
+  "name": "showapp",
+  "description": "showapp",
+  "main": "index.html",
+  "authors": [
+    "kevin"
+  ],
+  "license": "MIT",
+  "homepage": "/movies",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "angularjs#^1.7.0",
+    "angular-ui-router": "^1.0.15"
+  }
+}

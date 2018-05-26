@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="ShowApp">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="styles/style.css" />
+    
+</head>
+<body class="main">
+
+    <header>
+        <div class="logo"> </div>
+        <div class="menu"> 
+            <ul>
+                <li><a ui-sref="movies">Movies</a></li>
+                <li><a ui-sref="series">Series</a></li>
+                <li><a ui-sref="favoritos">Favoritos</a></li>
+            </ul>
+        </div>
+    </header>
+    <div class="filter">
+        <img src="" alt="">
+        <input type="text">
+    </div>
+
+    <ui-view></ui-view>
+</body>
+
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="app.js"></script>
+<script src="settings.js"></script>
+<script src="moduleRegistration.js"></script>
+<script src="services/movieServices.js"> </script>
+<script src="services/serieServices.js"></script>
+<script src="services/favoritoServices.js"></script>
+<script src="controllers/movieController.js"></script>
+<script src="controllers/serieController.js"></script>
+<script src="controllers/favoritoController.js"></script>
+
+
+</html>
