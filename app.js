@@ -17,7 +17,8 @@
 
             url:'/movies',
             templateUrl : "views/movies/main.html",
-            controller: 'movieController'
+            controller: 'movieController',
+            controllerAs: 'ctrlMc'
 
         })
 
@@ -25,14 +26,14 @@
 
             url:'/series',
             templateUrl : "views/series/main.html",
-            controller: ''
+            controller: 'serieController'
 
         })
 
         .state('favoritos',{
 
             url:'/favs',
-            templateUrl : '',
+            templateUrl : 'view/favoritos/fav.html',
             controller: ''
 
         })

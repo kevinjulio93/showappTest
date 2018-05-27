@@ -1,33 +1,63 @@
 <section class="movies-section">
+    <div class="selects-section">
 
-        <div>
-            <select name="year" id="">
-                
-            </select>
-            <input type="text" name="genre" id="">
-    
-        </div>
-    
-        <div class="card">
-    
-            <img src="" alt="">
-            <div class="content">
-                <h3>titulo pelicula</h3>
-                <ul>
-                    <li>timpo</li>
-                    <li>fecha</li>
-                    <li>genero</li>               
-                </ul>
-                <p>
-                    sinpsis de la pelicula
-                </p>
+        <h6>Descubra nuevas películas y programas de televisión</h6>
+
+        <section class="filter-section">
+            <div class="parametros">
+                <label class="select-title">Año</label>
+                <div class="year-select">
+                    <select id="year" name="year">
+                        <option ng-repeat="year in ctrlMc.years" value="{{year}}">{{year}}</option>
+                    </select>
+                </div>
             </div>
-            <div class="buttons">
-                <button>ver trailer</button>
-                <button>agregar favoritos</button>
+            <div class="parametros">
+                <label class="select-title">Género</label>
+                <div class="gender-select">
+                    <select id="gender" name="gender">
+                        <option value=""></option>
+                        <option ng-repeat="genre in ctrlMc.genres" value="{{genre.id}}">{{genre.name}}</option>
+
+                    </select>
+                </div>
+            </div>
+
+    </div>
+
+    </section>
+
+    <div class="space"></div>
+    
+    <section class="movie-list">
+        <div class="movies-all">
+            <div ng-repeat="movie in ctrlMc.movies" class="movie-card">
+                <div class="movie-pic">
+                    <img ng-src="{{ctrlMc.images.base_url + ctrlMc.images.poster_sizes[1] + movie.poster_path}}" />
+                </div>
+                <div class="movie-content">
+                    <div class="movie-title">
+                        <h4>{{movie.original_title}}</h4>
+                        <span class="average">{{movie.vote_average}}</span>
+                    </div>
+                    <div class="movie-detail">
+                        <ul class="info-item">
+                            <li>Genero</li>
+                            <li>2018-05-27</li>
+                            <li>Idioma</li>
+                        </ul>
+                    </div>
+                    <div class="movie-sinopsis">
+                        <p class="info-overview">{{movie.overview}}</p>
+                    </div>
+
+                    <div class="buttons">
+                        <button class="trailer-button" ng-click="">Ver Trailer</button>
+                        <button class="favo-button" ng-click="">Agregar a favoritos
+                            <i class="fa fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-    
-    
-    
     </section>
