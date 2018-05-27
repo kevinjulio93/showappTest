@@ -3,8 +3,9 @@
 
     var app = angular.module("ShowApp",[
         'ui.router',
-        'moduleService',
-        'moduleController'
+        'moduleController',
+        'moduleService'
+        
         
     ]);
 
@@ -16,7 +17,7 @@
 
             url:'/movies',
             templateUrl : "views/movies/main.html",
-            controller: ''
+            controller: 'movieController'
 
         })
 
