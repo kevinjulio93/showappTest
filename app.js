@@ -4,7 +4,8 @@
     var app = angular.module("ShowApp",[
         'ui.router',
         'moduleController',
-        'moduleService'
+        'moduleService',
+        'ngDialog'
         
         
     ]);
@@ -26,15 +27,17 @@
 
             url:'/series',
             templateUrl : "views/series/main.html",
-            controller: 'serieController'
+            controller: 'serieController',
+            controllerAs: 'ctrlSc'
 
         })
 
         .state('favoritos',{
 
-            url:'/favs',
-            templateUrl : 'view/favoritos/fav.html',
-            controller: ''
+            url:'/favoritos',
+            templateUrl : 'views/favoritos/main.html',
+            controller: 'favoritoController',
+            controllerAs: 'ctrlFv'
 
         })
         $urlRouterProvider.otherwise('/movies');

@@ -1,3 +1,10 @@
+<section class="filter">
+    <form ng-submit="ctrlMc.searchMovie()">    
+    <div class="search-input"> <img src="images/search.png">
+        <input class="input-search" type="text" name="search" ng-model="ctrlMc.q"  placeholder="Search for a movie, series and videos"> </div>
+    </form>
+</section>
+
 <section class="movies-section">
     <div class="selects-section">
 
@@ -7,7 +14,7 @@
             <div class="parametros">
                 <label class="select-title">Año</label>
                 <div class="year-select">
-                    <select id="year" name="year">
+                    <select id="year" name="year" ng-model="ctrlMc.year" ng-change="ctrlMc.getAll()">
                         <option ng-repeat="year in ctrlMc.years" value="{{year}}">{{year}}</option>
                     </select>
                 </div>
@@ -15,21 +22,21 @@
             <div class="parametros">
                 <label class="select-title">Género</label>
                 <div class="gender-select">
-                    <select id="gender" name="gender">
+                    <select id="gender" name="gender" ng-model="ctrlMc.genre" ng-change="ctrlMc.getAll()" >
                         <option value=""></option>
                         <option ng-repeat="genre in ctrlMc.genres" value="{{genre.id}}">{{genre.name}}</option>
 
                     </select>
                 </div>
             </div>
-
+            </section>
     </div>
 
     </section>
 
     <div class="space"></div>
     
-    <section class="movie-list">
+    <section class="movie-list" ng-if="ctrlMc.movies.length > 0">
         <div class="movies-all">
             <div ng-repeat="movie in ctrlMc.movies" class="movie-card">
                 <div class="movie-pic">
@@ -42,9 +49,9 @@
                     </div>
                     <div class="movie-detail">
                         <ul class="info-item">
-                            <li>Genero</li>
-                            <li>2018-05-27</li>
-                            <li>Idioma</li>
+                            <li ng-repeat="genre in ctrlMc.genres" ng-if="movie.genre_ids[0]==genre.id">{{genre.name}}</li>
+                            <li>{{movie.release_date}}</li>
+                            <li>{{movie.original_language}}</li>
                         </ul>
                     </div>
                     <div class="movie-sinopsis">
@@ -52,12 +59,24 @@
                     </div>
 
                     <div class="buttons">
-                        <button class="trailer-button" ng-click="">Ver Trailer</button>
-                        <button class="favo-button" ng-click="">Agregar a favoritos
+                        <button class="trailer-button" ng-click="ctrlMc.watchTrailer(movie)">Ver Trailer</button>
+                        <button class="favo-button" ng-click="ctrlMc.addFav(movie)">Agregar a favoritos
                             <i class="fa fa-heart"></i>
                         </button>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
+    <section class="movie-list" ng-if="ctrlMc.movies.length === 0">
+        <div class="movies-all">
+            <h2 >Sorry no movies were found related to these criterias</h2>
+        </div>
+    </section>
+    <section class="paginator" ng-hide="ctrlMc.movies.length === 0">
+
+        <button class="trailer-button prev-button" ng-click="ctrlMc.prevPage()" ng-disabled="ctrlMc.page==0">Previus</button>
+          Page:  {{ ctrlMc.page}}
+        <button class="trailer-button next-button" ng-click="ctrlMc.nextPage()">Next</button>
+
     </section>

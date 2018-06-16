@@ -1,0 +1,84 @@
+<section class="filter">
+    <form ng-submit="ctrlFv.searchSerie()">    
+    <div class="search-input"> <img src="images/search.png">
+        <input class="input-search" type="text" name="search" ng-model="ctrlFv.q"  placeholder="Search for a movie, series and videos"> </div>
+    </form>
+</section>
+
+<section class="movies-section">
+    <div class="selects-section">
+
+        <h6>Mis peliculas y series favoritas {{ctrlFv.nombre}}</h6>
+
+        <section class="filter-section">
+            <div class="parametros">
+                <label class="select-title">Año</label>
+                <div class="year-select">
+                    <select id="year" name="year" ng-model="ctrlFv.year" ng-change="ctrlFv.getAll()">
+                        <option ng-repeat="year in ctrlFv.years" value="{{year}}">{{year}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="parametros">
+                <label class="select-title">Género</label>
+                <div class="gender-select">
+                    <select id="gender" name="gender" ng-model="ctrlFv.genre" ng-change="ctrlFv.getAll()">
+                        <option value=""></option>
+                        <option ng-repeat="genre in ctrlFv.genres" value="{{ctrlFv.id}}">{{genre.name}}</option>
+
+                    </select>
+                </div>
+            </div>
+
+    </div>
+
+    </section>
+
+    <div class="space"></div>
+    
+    <section class="movie-list" ng-if="ctrlFv.favoritos[0] != 1">
+        <div class="movies-all">
+            <div ng-repeat="fav in ctrlFv.favoritos" class="movie-card">
+                <div class="movie-pic">
+                    <img ng-src="{{ctrlFv.images.base_url + ctrlFv.images.poster_sizes[1] + fav.poster_path}}" />
+                </div>
+                <div class="movie-content">
+                    <div class="movie-title">
+                        <h4>{{fav.original_name || fav.title}}</h4>
+                        <span class="average">{{fav.vote_average}}</span>
+                    </div>
+                    <div class="movie-detail">
+                        <ul class="info-item">
+                            <li ng-repeat="genre in ctrlFv.genres" ng-if="fav.genre_ids[0]==genre.id">{{genre.name}}</li>
+                            <li>{{fav.first_air_date || fav.release_date}}</li>
+                            <li>{{fav.original_language}}</li>
+                        </ul>
+                    </div>
+                    <div class="movie-sinopsis">
+                        <p class="info-overview">{{fav.overview}}</p>
+                    </div>
+
+                    <div class="buttons">
+                        <button class="trailer-button" ng-click="ctrlFv.watchTrailer(serie)">Ver Trailer</button>
+                        <button class="favo-button" ng-click="">Agregar a favoritos
+                            <i class="fa fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="movie-list" ng-if="ctrlFv.favoritos[0]==1">
+        <div class="movies-all">
+            <h2>Sorry no there movies or series </h2>
+        </div>
+    </section>
+
+    <section class="paginator" ng-hide="ctrlFv.favoritos.length > 0">
+
+        <button class="trailer-button prev-button" ng-click="ctrlFv.prevPage()" ng-disabled="ctrlFv.page==0">Previus</button>
+          Page:  {{ ctrlFv.page}}
+        <button class="trailer-button next-button" ng-click="ctrlFv.nextPage()">Next</button>
+
+    </section>

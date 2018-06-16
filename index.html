@@ -5,8 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="styles/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="bower_components/ng-dialog/css/ngDialog.min.css" rel="stylesheet" />
+    <link href="bower_components/ng-dialog/css/ngDialog-theme-default.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" media="screen" href="styles/style.css" />
+    
     
 </head>
 <body class="main">
@@ -27,18 +30,13 @@
         <img src="images/search.png" alt="">
         <input class="search" type="text" placeholder="Search for a movie, series and video">
     </div> -->
-    <section class="filter">
-        
-            <div class="search-input"> <img src="images/search.png">
-                <input class="input-search" type="text" name="search" ng-model="vm.search" placeholder="Search for a movie, series and videos"> </div>
-        
-    </section>
 
     <ui-view></ui-view>
 </body>
 
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="bower_components/ng-dialog/js/ngDialog.min.js"></script>
 
 
 <script src="moduleRegistration.js"></script>

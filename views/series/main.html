@@ -1,1 +1,83 @@
-hello world
+<section class="filter">
+    <form ng-submit="ctrlSc.searchSerie()">    
+    <div class="search-input"> <img src="images/search.png">
+        <input class="input-search" type="text" name="search" ng-model="ctrlSc.q"  placeholder="Search for a movie, series and videos"> </div>
+    </form>
+</section>
+
+<section class="movies-section">
+    <div class="selects-section">
+
+        <h6>Descubra nuevas películas y programas de televisión</h6>
+
+        <section class="filter-section">
+            <div class="parametros">
+                <label class="select-title">Año</label>
+                <div class="year-select">
+                    <select id="year" name="year" ng-model="ctrlSc.year" ng-change="ctrlSc.getAll()">
+                        <option ng-repeat="year in ctrlSc.years" value="{{year}}">{{year}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="parametros">
+                <label class="select-title">Género</label>
+                <div class="gender-select">
+                    <select id="gender" name="gender" ng-model="ctrlSc.genre" ng-change="ctrlSc.getAll()">
+                        <option value=""></option>
+                        <option ng-repeat="genre in ctrlSc.genres" value="{{genre.id}}">{{genre.name}}</option>
+
+                    </select>
+                </div>
+            </div>
+
+    </div>
+
+    </section>
+
+    <div class="space"></div>
+    
+    <section class="movie-list" ng-if="ctrlSc.series.length > 0">
+        <div class="movies-all">
+            <div ng-repeat="serie in ctrlSc.series" class="movie-card">
+                <div class="movie-pic">
+                    <img ng-src="{{ctrlSc.images.base_url + ctrlSc.images.poster_sizes[1] + serie.poster_path}}" />
+                </div>
+                <div class="movie-content">
+                    <div class="movie-title">
+                        <h4>{{serie.original_name}}</h4>
+                        <span class="average">{{serie.vote_average}}</span>
+                    </div>
+                    <div class="movie-detail">
+                        <ul class="info-item">
+                            <li ng-repeat="genre in ctrlSc.genres" ng-if="serie.genre_ids[0]==genre.id">{{genre.name}}</li>
+                            <li>{{serie.first_air_date}}</li>
+                            <li>{{serie.original_language}}</li>
+                        </ul>
+                    </div>
+                    <div class="movie-sinopsis">
+                        <p class="info-overview">{{serie.overview}}</p>
+                    </div>
+
+                    <div class="buttons">
+                        <button class="trailer-button" ng-click="ctrlSc.watchTrailer(serie)">Ver Trailer</button>
+                        <button class="favo-button" ng-click="ctrlSc.addFav(serie)">Agregar a favoritos
+                            <i class="fa fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="movie-list" ng-if="ctrlSc.series.length===0">
+        <div class="movies-all">
+            <h2>Sorry no movies were found related to these criterias</h2>
+        </div>
+    </section>
+
+    <section class="paginator" ng-hide="ctrlSc.series.length === 0">
+
+        <button class="trailer-button prev-button" ng-click="ctrlSc.prevPage()" ng-disabled="ctrlSc.page==0">Previus</button>
+          Page:  {{ ctrlSc.page}}
+        <button class="trailer-button next-button" ng-click="ctrlSc.nextPage()">Next</button>
+
+    </section>

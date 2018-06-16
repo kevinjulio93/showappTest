@@ -16,6 +16,7 @@
   ],
   "dependencies": {
     "angular": "angularjs#^1.7.0",
-    "angular-ui-router": "^1.0.15"
+    "angular-ui-router": "^1.0.15",
+    "ng-dialog": "^1.4.0"
   }
 }
