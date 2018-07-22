@@ -54,13 +54,21 @@ header{
     border-bottom: 2px solid #0abffe;
 }
 
-.menu li.active>a:active{
-    text-decoration: none;
+.menu_active {
     color: #0abffe;
     display: block;
     padding-bottom: 7px;
     border-bottom: 2px solid #0abffe;
 }
+
+
+/* .menu li.active>a:active{
+    text-decoration: none;
+    color: #0abffe;
+    display: block;
+    padding-bottom: 7px;
+    border-bottom: 2px solid #0abffe;
+} */
 
 
 .filter {
@@ -136,7 +144,6 @@ h6 {
 .gender-select {
     height: 31px;
     width: 200px;
-    background: url(../images/close.png) no-repeat scroll 13px center;
     background-position-x: 180px;
     overflow: hidden;
     border-width: 1px;

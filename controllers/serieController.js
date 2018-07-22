@@ -4,9 +4,9 @@
         .controller('serieController', serieController)
 
 
-    serieController.$inject = ['serieServices','$sce','ngDialog'];
+    serieController.$inject = ['serieServices','$sce','ngDialog','$rootScope'];
 
-    function serieController(serieServices, $sce, ngDialog ) {
+    function serieController(serieServices, $sce, ngDialog, $rootScope ) {
         var ctrlSc = this;
         ctrlSc.series = [];
         ctrlSc.images = [];
@@ -19,12 +19,14 @@
         ctrlSc.favoritos = [];
         
 
-
+        $rootScope.menuMovie =false;
+        $rootScope.menuSerie =true;
+        $rootScope.menuFav =false;
 
         ctrlSc.getAll = function () {
             serieServices.getAll(ctrlSc.year, ctrlSc.page, ctrlSc.genre ).then(function (resp) {
                 ctrlSc.series = resp.data.results;
-                console.log(ctrlSc.series);
+                
             }, function (error) {
                     console.log(error);
                 }
@@ -52,7 +54,7 @@
         ctrlSc.getGenres = function() {
             serieServices.getGenres().then(function(resp){
                 ctrlSc.genres = resp.data.genres;
-                //console.log(ctrlSc.genres);
+                
             })
         }
 
@@ -64,13 +66,13 @@
             function setTrailer(resp) {
                 var trailerId = resp.data.results[0].key;
                 var url = $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + trailerId + '?rel=0&autoplay=1');
-                console.log(url);
+                
                 ngDialog.open({
                     template: 'views/movies/trailers.html',
                     controller: function Ctrl() {
                         var vm = this;
                         vm.trailerUrl = url;
-                        console.log(vm.trailerUrl);
+                        
                     },
                     controllerAs: 'vm'
                 });
@@ -86,13 +88,13 @@
 
         ctrlSc.prevPage= function (){
             ctrlSc.page -= 1;
-            console.log(ctrlSc.page);
+            
             ctrlSc.getAll();
         }
 
         ctrlSc.nextPage =function (){
             ctrlSc.page +=  1;
-            console.log(ctrlSc.page);
+            
             ctrlSc.getAll();
         }
 

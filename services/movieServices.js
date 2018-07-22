@@ -28,7 +28,7 @@
         
         function getConfig() {
             var url = API_URL + 'configuration?api_key=' + API_KEY;
-            console.log(url);
+            
             return $http.get(url);
         }
 

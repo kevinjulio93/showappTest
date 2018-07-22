@@ -4,9 +4,9 @@
         .controller('movieController', moviesController)
 
 
-    moviesController.$inject = ['movieServices','$sce','ngDialog',];
+    moviesController.$inject = ['movieServices','$sce','ngDialog','$rootScope'];
 
-    function moviesController(movieServices,$sce, ngDialog ) {
+    function moviesController(movieServices,$sce, ngDialog, $rootScope ) {
         var ctrlMc = this;
         ctrlMc.movies = [];
         ctrlMc.images = [];
@@ -20,12 +20,16 @@
         
         
 
+        $rootScope.menuMovie=true;
+        $rootScope.menuSerie =false;
+        $rootScope.menuFav =false;
 
+        
 
         ctrlMc.getAll = function () {
             movieServices.getAll(ctrlMc.year,ctrlMc.page,ctrlMc.genre ).then(function (resp) {
                 ctrlMc.movies = resp.data.results;
-                console.log(ctrlMc.movies);
+                
             }, function (error) {
                     console.log(error);
                 }
@@ -53,26 +57,26 @@
         ctrlMc.getGenres = function() {
             movieServices.getGenres().then(function(resp){
                 ctrlMc.genres = resp.data.genres;
-                console.log(ctrlMc.genres);
+                
             })
         }
 
         
 
         ctrlMc.watchTrailer = function (movie) {
-            console.log("asdas");
+            
             movieServices.getTrailer(movie.id).then(setTrailer);
 
             function setTrailer(resp) {
                 var trailerId = resp.data.results[0].key;
                 var url = $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + trailerId + '?rel=0&autoplay=1');
-                console.log(url);
+                
                 ngDialog.open({
                     template: 'views/movies/trailers.html',
                     controller: function Ctrl() {
                         var vm = this;
                         vm.trailerUrl = url;
-                        console.log(vm.trailerUrl);
+                        
                     },
                     controllerAs: 'vm'
                 });
@@ -88,13 +92,13 @@
 
         ctrlMc.prevPage= function (){
             ctrlMc.page -= 1;
-            console.log(ctrlMc.page);
+            
             ctrlMc.getAll();
         }
 
         ctrlMc.nextPage =function (){
             ctrlMc.page +=  1;
-            console.log(ctrlMc.page);
+            
             ctrlMc.getAll();
         }
 

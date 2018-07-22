@@ -13,18 +13,19 @@
         <section class="filter-section">
             <div class="parametros">
                 <label class="select-title">Año</label>
-                <div class="year-select">
-                    <select id="year" name="year" ng-model="ctrlFv.year" ng-change="ctrlFv.getAll()">
+                <div class="year-select" class="custom-select">
+                    <select  ="year" name="year" ng-model="ctrlFv.year" ng-change="ctrlFv.getAll()">
+                        <option value="">All</option>
                         <option ng-repeat="year in ctrlFv.years" value="{{year}}">{{year}}</option>
                     </select>
                 </div>
             </div>
-            <div class="parametros">
+            <div class="parametros ">
                 <label class="select-title">Género</label>
-                <div class="gender-select">
+                <div class="gender-select cumstom-select">
                     <select id="gender" name="gender" ng-model="ctrlFv.genre" ng-change="ctrlFv.getAll()">
-                        <option value=""></option>
-                        <option ng-repeat="genre in ctrlFv.genres" value="{{ctrlFv.id}}">{{genre.name}}</option>
+                        <option value="">All</option>
+                        <option ng-repeat="genre in ctrlFv.genres" value="{{genre.id}}">{{genre.name}}</option>
 
                     </select>
                 </div>
@@ -38,7 +39,7 @@
     
     <section class="movie-list" ng-if="ctrlFv.favoritos[0] != 1">
         <div class="movies-all">
-            <div ng-repeat="fav in ctrlFv.favoritos" class="movie-card">
+            <div ng-repeat="fav in ctrlFv.favoritos | filter: ctrlFv.q | filter: ctrlFv.year | filter: ctrlFv.genre" class="movie-card">
                 <div class="movie-pic">
                     <img ng-src="{{ctrlFv.images.base_url + ctrlFv.images.poster_sizes[1] + fav.poster_path}}" />
                 </div>
@@ -59,7 +60,7 @@
                     </div>
 
                     <div class="buttons">
-                        <button class="trailer-button" ng-click="ctrlFv.watchTrailer(serie)">Ver Trailer</button>
+                        <button class="trailer-button" ng-click="ctrlFv.watchTrailer(fav)">Ver Trailer</button>
                         <button class="favo-button" ng-click="">Agregar a favoritos
                             <i class="fa fa-heart"></i>
                         </button>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>ShowApp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="bower_components/ng-dialog/css/ngDialog.min.css" rel="stylesheet" />
@@ -12,7 +12,7 @@
     
     
 </head>
-<body class="main">
+<body class="main" ng-controller="indexController">
 
     <header>
         <div class="logo"> 
@@ -20,11 +20,11 @@
         </div>
         <div class="menu"> 
             <ul class="mi-menu">
-                <li><a ui-sref="movies">Movies</a></li>
-                <li><a ui-sref="series">Series</a></li>
-                <li><a ui-sref="favoritos">Favoritos</a></li>
+                <li><a ui-sref="movies"     ng-class="{'menu_active': menuMovie }" >Movies</a></li>
+                <li><a ui-sref="series"     ng-class="{'menu_active': menuSerie }">Series</a></li>
+                <li><a ui-sref="favoritos"  ng-class="{'menu_active': menuFav }">Favoritos</a></li>
             </ul>
-        </div>
+        </div>.
     </header>
     <!-- <div class="filter">
         <img src="images/search.png" alt="">
@@ -43,6 +43,7 @@
 <script src="services/movieServices.js"> </script>
 <script src="services/serieServices.js"></script>
 <script src="services/favoritoServices.js"></script>
+<script src="controllers/indexController.js"></script>
 <script src="controllers/movieController.js"></script>
 <script src="controllers/serieController.js"></script>
 <script src="controllers/favoritoController.js"></script>
